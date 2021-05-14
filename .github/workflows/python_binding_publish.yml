@@ -27,7 +27,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         maturin build --release --manylinux off
+         maturin build --release --manylinux off --interpreter python${{ matrix.python-version }}
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v2
        with:
@@ -52,7 +52,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         maturin build --release --manylinux off
+         maturin build --release --manylinux off --interpreter python${{ matrix.python-version }}
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v2
        with:
@@ -81,7 +81,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         maturin build --release --manylinux off
+         maturin build --release --manylinux off --interpreter python${{ matrix.python-version }}
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v1
        with:
