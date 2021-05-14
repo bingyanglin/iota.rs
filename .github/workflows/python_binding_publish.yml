@@ -23,6 +23,19 @@ jobs:
      - uses: actions/setup-python@v2
        with:
          python-version: ${{ matrix.python-version }}
+
+     - name: Modify the py version to 3.7 in Cargo
+       run: sed -i 's/py36/py37/g' Cargo.toml
+       if: python-version == '3.7'
+     
+     - name: Modify the py version to 3.8 in Cargo
+       run: sed -i 's/py36/py38/g' Cargo.toml
+       if: python-version == '3.8'
+
+     - name: Modify the py version to 3.9 in Cargo
+       run: sed -i 's/py36/py39/g' Cargo.toml
+       if: python-version == '3.9'
+
      - name: Build wheels and publish
        working-directory: bindings/python/native
        run: |
@@ -48,6 +61,19 @@ jobs:
      - uses: actions/setup-python@v2
        with:
          python-version: ${{ matrix.python-version }}
+
+     - name: Modify the py version to 3.7 in Cargo
+       run: sed -i 's/py36/py37/g' Cargo.toml
+       if: python-version == '3.7'
+     
+     - name: Modify the py version to 3.8 in Cargo
+       run: sed -i 's/py36/py38/g' Cargo.toml
+       if: python-version == '3.8'
+
+     - name: Modify the py version to 3.9 in Cargo
+       run: sed -i 's/py36/py39/g' Cargo.toml
+       if: python-version == '3.9'
+
      - name: Build wheels and publish
        working-directory: bindings/python/native
        run: |
@@ -77,11 +103,22 @@ jobs:
      - name: Get current date
        run: echo "CURRENT_DATE=$(Get-Date -Format "yyyy-MM-dd")" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
     
+     - name: Modify the py version to 3.7 in Cargo
+       run: sed -i 's/py36/py37/g' Cargo.toml
+       if: python-version == '3.7'
+     
+     - name: Modify the py version to 3.8 in Cargo
+       run: sed -i 's/py36/py38/g' Cargo.toml
+       if: python-version == '3.8'
+
+     - name: Modify the py version to 3.9 in Cargo
+       run: sed -i 's/py36/py39/g' Cargo.toml
+       if: python-version == '3.9'
+
      - name: Build wheels and publish
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         mv Cargo_win_py{{ matrix.python-version }}.toml Cargo.toml
          maturin build --release --manylinux off --interpreter python${{ matrix.python-version }}
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v1
