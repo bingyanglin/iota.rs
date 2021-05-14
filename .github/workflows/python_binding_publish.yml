@@ -5,6 +5,7 @@ on:
     branches:
       - dev
       - main
+      - maturin_publish
 
 jobs:
 
@@ -74,11 +75,12 @@ jobs:
      - name: Get current date
        run: echo "CURRENT_DATE=$(Get-Date -Format "yyyy-MM-dd")" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
     
-     - name: Build wheels
+     - name: Build wheels and publish
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
          maturin build --release --manylinux off
+         maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v1
        with:
          name: windows-iota-client-py${{ matrix.python-version }}-wheels
