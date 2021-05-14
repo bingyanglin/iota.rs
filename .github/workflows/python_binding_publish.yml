@@ -67,7 +67,7 @@ jobs:
          name: osx-iota-client-py${{ matrix.python-version }}-wheel
          path: bindings/python/native/target/wheels/
 
-  windows-wheels-py3.6:
+  windows-wheels-py36:
     runs-on: windows-latest
     steps:
      - uses: actions/checkout@v2
@@ -93,7 +93,7 @@ jobs:
          name: windows-iota-client-py3.6-wheels
          path: bindings/python/native/target/wheels/
 
-  windows-wheels-py3.7:
+  windows-wheels-py37:
     runs-on: windows-latest
     steps:
      - uses: actions/checkout@v2
@@ -120,7 +120,7 @@ jobs:
          name: windows-iota-client-py3.7-wheels
          path: bindings/python/native/target/wheels/
 
-  windows-wheels-py3.8:
+  windows-wheels-py38:
     runs-on: windows-latest
     steps:
      - uses: actions/checkout@v2
@@ -147,7 +147,7 @@ jobs:
          name: windows-iota-client-py3.8-wheels
          path: bindings/python/native/target/wheels/
 
-  windows-wheels-py3.9:
+  windows-wheels-py39:
     runs-on: windows-latest
     steps:
      - uses: actions/checkout@v2
