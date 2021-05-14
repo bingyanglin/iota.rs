@@ -24,17 +24,8 @@ jobs:
        with:
          python-version: ${{ matrix.python-version }}
 
-     - name: Modify the py version to 3.7 in Cargo
-       if: ${{ matrix.python-version }} == 3.7
-       run: sed -i 's/py36/py37/g' "bindings/python/native/Cargo.toml"
-
-     - name: Modify the py version to 3.8 in Cargo
-       if: ${{ matrix.python-version }} == 3.8
-       run: sed -i 's/py36/py38/g' "bindings/python/native/Cargo.toml"
-
-     - name: Modify the py version to 3.9 in Cargo
-       if: ${{ matrix.python-version }} == 3.9
-       run: sed -i 's/py36/py39/g' "bindings/python/native/Cargo.toml"
+     - name: Remove abi3
+       run: sed -i 's/\, \"abi3-py36\"//g' "bindings/python/native/Cargo.toml"
 
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -62,17 +53,8 @@ jobs:
        with:
          python-version: ${{ matrix.python-version }}
 
-     - name: Modify the py version to 3.7 in Cargo
-       if: ${{ matrix.python-version }} == 3.7
-       run: sed -i '' 's/py36/py37/g' "bindings/python/native/Cargo.toml"
-     
-     - name: Modify the py version to 3.8 in Cargo
-       if: ${{ matrix.python-version }} == 3.8
-       run: sed -i '' 's/py36/py38/g' "bindings/python/native/Cargo.toml"
-
-     - name: Modify the py version to 3.9 in Cargo
-       if: ${{ matrix.python-version }} == 3.9
-       run: sed -i '' 's/py36/py39/g' "bindings/python/native/Cargo.toml"
+     - name: Remove abi3
+       run: sed -i '' 's/\, \"abi3-py36\"//g' "bindings/python/native/Cargo.toml"
        
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -85,43 +67,109 @@ jobs:
          name: osx-iota-client-py${{ matrix.python-version }}-wheel
          path: bindings/python/native/target/wheels/
 
-  windows-wheels:
+  windows-wheels-py3.6:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
     steps:
      - uses: actions/checkout@v2
      - uses: actions-rs/toolchain@v1
        with:
          toolchain: stable
-         default: true
-     - uses: actions/setup-python@v2
-       with:
-         python-version: ${{ matrix.python-version }}
-
+         default: true         
      - name: Get current date
        run: echo "CURRENT_DATE=$(Get-Date -Format "yyyy-MM-dd")" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-    
-     - name: Modify the py version to 3.7 in Cargo
-       if: ${{ matrix.python-version }} == 3.7
-       run: sed -i 's/py36/py37/g' "bindings/python/native/Cargo.toml"
 
-     - name: Modify the py version to 3.8 in Cargo
-       if: ${{ matrix.python-version }} == 3.8
-       run: sed -i 's/py36/py38/g' "bindings/python/native/Cargo.toml"
-
-     - name: Modify the py version to 3.9 in Cargo
-       if: ${{ matrix.python-version }} == 3.9
-       run: sed -i 's/py36/py39/g' "bindings/python/native/Cargo.toml"
+     - uses: actions/setup-python@v2
+       with:
+         python-version: 3.6
 
      - name: Build wheels and publish
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         maturin build --release --manylinux off --interpreter python${{ matrix.python-version }}
+         maturin build --release --manylinux off --interpreter python3.6
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v1
        with:
-         name: windows-iota-client-py${{ matrix.python-version }}-wheels
+         name: windows-iota-client-py3.6-wheels
+         path: bindings/python/native/target/wheels/
+
+  windows-wheels-py3.7:
+    runs-on: windows-latest
+    steps:
+     - uses: actions/checkout@v2
+     - uses: actions-rs/toolchain@v1
+       with:
+         toolchain: stable
+         default: true         
+     - name: Get current date
+       run: echo "CURRENT_DATE=$(Get-Date -Format "yyyy-MM-dd")" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+     - uses: actions/setup-python@v2
+       with:
+         python-version: 3.7
+
+     - name: Build wheels and publish
+       working-directory: bindings/python/native
+       run: |
+         python3 -m pip install -Iv maturin==0.9.4
+         sed -i 's/abi3-py36/py37/g' "bindings/python/native/Cargo.toml"
+         maturin build --release --manylinux off --interpreter python3.7
+         maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
+     - uses: actions/upload-artifact@v1
+       with:
+         name: windows-iota-client-py3.7-wheels
+         path: bindings/python/native/target/wheels/
+
+  windows-wheels-py3.8:
+    runs-on: windows-latest
+    steps:
+     - uses: actions/checkout@v2
+     - uses: actions-rs/toolchain@v1
+       with:
+         toolchain: stable
+         default: true         
+     - name: Get current date
+       run: echo "CURRENT_DATE=$(Get-Date -Format "yyyy-MM-dd")" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+     - uses: actions/setup-python@v2
+       with:
+         python-version: 3.8
+
+     - name: Build wheels and publish
+       working-directory: bindings/python/native
+       run: |
+         python3 -m pip install -Iv maturin==0.9.4
+         sed -i 's/abi3-py36/py38/g' "bindings/python/native/Cargo.toml"
+         maturin build --release --manylinux off --interpreter python3.8
+         maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
+     - uses: actions/upload-artifact@v1
+       with:
+         name: windows-iota-client-py3.8-wheels
+         path: bindings/python/native/target/wheels/
+
+  windows-wheels-py3.9:
+    runs-on: windows-latest
+    steps:
+     - uses: actions/checkout@v2
+     - uses: actions-rs/toolchain@v1
+       with:
+         toolchain: stable
+         default: true         
+     - name: Get current date
+       run: echo "CURRENT_DATE=$(Get-Date -Format "yyyy-MM-dd")" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+     - uses: actions/setup-python@v2
+       with:
+         python-version: 3.9
+
+     - name: Build wheels and publish
+       working-directory: bindings/python/native
+       run: |
+         python3 -m pip install -Iv maturin==0.9.4
+         sed -i 's/abi3-py36/py39/g' "bindings/python/native/Cargo.toml"
+         maturin build --release --manylinux off --interpreter python3.9
+         maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
+     - uses: actions/upload-artifact@v1
+       with:
+         name: windows-iota-client-py3.9-wheels
          path: bindings/python/native/target/wheels/
