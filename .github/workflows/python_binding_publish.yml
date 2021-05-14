@@ -81,6 +81,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
+         mv Cargo_win_py{{ matrix.python-version }}.toml Cargo.toml
          maturin build --release --manylinux off --interpreter python${{ matrix.python-version }}
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v1
