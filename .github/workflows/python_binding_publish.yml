@@ -25,16 +25,16 @@ jobs:
          python-version: ${{ matrix.python-version }}
 
      - name: Modify the py version to 3.7 in Cargo
-       run: sed -i 's/py36/py37/g' "bindings/python/native/Cargo.toml"
        if: ${{ matrix.python-version }} == '3.7'
+       run: sed -i 's/py36/py37/g' "bindings/python/native/Cargo.toml"
 
      - name: Modify the py version to 3.8 in Cargo
-       run: sed -i 's/py36/py38/g' "bindings/python/native/Cargo.toml"
        if: ${{ matrix.python-version }} == '3.8'
+       run: sed -i 's/py36/py38/g' "bindings/python/native/Cargo.toml"
 
      - name: Modify the py version to 3.9 in Cargo
-       run: sed -i 's/py36/py39/g' "bindings/python/native/Cargo.toml"
        if: ${{ matrix.python-version }} == '3.9'
+       run: sed -i 's/py36/py39/g' "bindings/python/native/Cargo.toml"
 
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -63,17 +63,17 @@ jobs:
          python-version: ${{ matrix.python-version }}
 
      - name: Modify the py version to 3.7 in Cargo
-       run: sed -i 's/py36/py37/g' "bindings/python/native/Cargo.toml"
        if: ${{ matrix.python-version }} == '3.7'
+       run: sed -i 's/py36/py37/g' "bindings/python/native/Cargo.toml"
      
      - name: Modify the py version to 3.8 in Cargo
-       run: sed -i 's/py36/py38/g' "bindings/python/native/Cargo.toml"
        if: ${{ matrix.python-version }} == '3.8'
+       run: sed -i 's/py36/py38/g' "bindings/python/native/Cargo.toml"
 
      - name: Modify the py version to 3.9 in Cargo
-       run: sed -i 's/py36/py39/g' "bindings/python/native/Cargo.toml"
        if: ${{ matrix.python-version }} == '3.9'
-
+       run: sed -i 's/py36/py39/g' "bindings/python/native/Cargo.toml"
+       
      - name: Build wheels and publish
        working-directory: bindings/python/native
        run: |
@@ -104,16 +104,16 @@ jobs:
        run: echo "CURRENT_DATE=$(Get-Date -Format "yyyy-MM-dd")" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
     
      - name: Modify the py version to 3.7 in Cargo
-       run: sed -i 's/py36/py37/g' "bindings/python/native/Cargo.toml"
        if: ${{ matrix.python-version }} == '3.7'
+       run: sed -i 's/py36/py37/g' "bindings/python/native/Cargo.toml"
 
      - name: Modify the py version to 3.8 in Cargo
-       run: sed -i 's/py36/py38/g' "bindings/python/native/Cargo.toml"
        if: ${{ matrix.python-version }} == '3.8'
+       run: sed -i 's/py36/py38/g' "bindings/python/native/Cargo.toml"
 
      - name: Modify the py version to 3.9 in Cargo
-       run: sed -i 's/py36/py39/g' "bindings/python/native/Cargo.toml"
        if: ${{ matrix.python-version }} == '3.9'
+       run: sed -i 's/py36/py39/g' "bindings/python/native/Cargo.toml"
 
      - name: Build wheels and publish
        working-directory: bindings/python/native
