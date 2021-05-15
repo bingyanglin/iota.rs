@@ -2,7 +2,7 @@
 
 [package]
 name = "iota-client"
-version = "0.1.2-alpha.3"
+version = "0.1.0-test.0"
 authors = ["Bing-Yang Lin <bingyang.lin@iota.org>"]
 edition = "2018"
 description = "Client library of IOTA"
