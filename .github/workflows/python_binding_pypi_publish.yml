@@ -119,7 +119,6 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         sed -i 's/py36/py39/g' "Cargo.toml"
          maturin build --release --manylinux off
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v2
@@ -143,7 +142,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         sed -i 's/py36/py37/g' "Cargo.toml"
+         sed -i '' 's/py36/py37/g' "Cargo.toml"
          maturin build --release --manylinux off
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v2
@@ -167,7 +166,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         sed -i 's/py36/py38/g' "Cargo.toml"
+         sed -i '' 's/py36/py38/g' "Cargo.toml"
          maturin build --release --manylinux off
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v2
@@ -191,7 +190,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         sed -i 's/py36/py39/g' "Cargo.toml"
+         sed -i '' 's/py36/py39/g' "Cargo.toml"
          maturin build --release --manylinux off
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v2
