@@ -35,7 +35,7 @@ jobs:
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v2
        with:
-         name: linux-iota-client-py${{ matrix.python-version }}-wheel
+         name: linux-iota-client-wheels
          path: bindings/python/native/target/wheels/
 
   osx-wheels:
@@ -60,11 +60,11 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         maturin build --release --manylinux off --interpreter python${{ matrix.python-version }}
+         maturin build --release --manylinux off
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v2
        with:
-         name: osx-iota-client-py${{ matrix.python-version }}-wheel
+         name: osx-iota-client-wheels
          path: bindings/python/native/target/wheels/
 
   windows-wheels-py36:
@@ -112,7 +112,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         sed -i 's/abi3-py36/py37/g' "bindings/python/native/Cargo.toml"
+         sed -i 's/py36/py37/g' "bindings/python/native/Cargo.toml"
          maturin build --release --manylinux off --interpreter python3.7
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v1
@@ -139,7 +139,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         sed -i 's/abi3-py36/py38/g' "bindings/python/native/Cargo.toml"
+         sed -i 's/py36/py38/g' "bindings/python/native/Cargo.toml"
          maturin build --release --manylinux off --interpreter python3.8
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v1
@@ -166,7 +166,7 @@ jobs:
        working-directory: bindings/python/native
        run: |
          python3 -m pip install -Iv maturin==0.9.4
-         sed -i 's/abi3-py36/py39/g' "bindings/python/native/Cargo.toml"
+         sed -i 's/py36/py39/g' "bindings/python/native/Cargo.toml"
          maturin build --release --manylinux off --interpreter python3.9
          maturin publish -u ${{ secrets.PYPI_USR_NAME }} -p ${{ secrets.PYPI_USR_PWD }}
      - uses: actions/upload-artifact@v1
