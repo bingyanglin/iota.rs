@@ -1,4 +1,4 @@
-name: Build python binding wheels
+name: Publish python binding wheels to pypi
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
           override: true
      - uses: actions/setup-python@v2
        with:
-         python-version: ${{ matrix.python-version }}
+         python-version: 3.6
 
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -40,7 +40,7 @@ jobs:
           override: true
      - uses: actions/setup-python@v2
        with:
-         python-version: ${{ matrix.python-version }}
+         python-version: 3.7
 
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -64,7 +64,7 @@ jobs:
           override: true
      - uses: actions/setup-python@v2
        with:
-         python-version: ${{ matrix.python-version }}
+         python-version: 3.8
 
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -88,7 +88,7 @@ jobs:
           override: true
      - uses: actions/setup-python@v2
        with:
-         python-version: ${{ matrix.python-version }}
+         python-version: 3.9
 
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -113,7 +113,7 @@ jobs:
          default: true
      - uses: actions/setup-python@v2
        with:
-         python-version: ${{ matrix.python-version }}
+         python-version: 3.6
        
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -136,7 +136,7 @@ jobs:
          default: true
      - uses: actions/setup-python@v2
        with:
-         python-version: ${{ matrix.python-version }}
+         python-version: 3.7
        
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -160,7 +160,7 @@ jobs:
          default: true
      - uses: actions/setup-python@v2
        with:
-         python-version: ${{ matrix.python-version }}
+         python-version: 3.8
        
      - name: Build wheels and publish
        working-directory: bindings/python/native
@@ -184,7 +184,7 @@ jobs:
          default: true
      - uses: actions/setup-python@v2
        with:
-         python-version: ${{ matrix.python-version }}
+         python-version: 3.9
        
      - name: Build wheels and publish
        working-directory: bindings/python/native
