@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Error","Error type of the iota client crate."]],"type":[["Result","Type alias of `Result` in iota-client"]]});

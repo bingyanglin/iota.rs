@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["iota_client"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html\" title=\"trait core::ops::drop::Drop\">Drop</a> for <a class=\"struct\" href=\"iota_client/client/struct.Client.html\" title=\"struct iota_client::client::Client\">Client</a>","synthetic":false,"types":["iota_client::client::Client"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

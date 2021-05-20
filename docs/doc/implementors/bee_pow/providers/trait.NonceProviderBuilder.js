@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["iota_client"] = [{"text":"impl NonceProviderBuilder for <a class=\"struct\" href=\"iota_client/client/struct.ClientMinerBuilder.html\" title=\"struct iota_client::client::ClientMinerBuilder\">ClientMinerBuilder</a>","synthetic":false,"types":["iota_client::client::ClientMinerBuilder"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

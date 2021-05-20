@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["GetBalanceBuilder","Builder of get_balance API"]]});
