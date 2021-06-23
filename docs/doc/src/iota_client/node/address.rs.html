@@ -145,7 +145,7 @@
 <span class="kw">const</span> <span class="ident">TRANSACTION_ID_LENGTH</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">64</span>;
 
 <span class="doccomment">/// Output type filter.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OutputType</span> {
     <span class="doccomment">/// Signature locked single output.</span>
     <span class="ident">SignatureLockedSingle</span>,

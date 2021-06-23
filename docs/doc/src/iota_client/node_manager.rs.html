@@ -624,6 +624,67 @@
 <span id="621">621</span>
 <span id="622">622</span>
 <span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
+<span id="650">650</span>
+<span id="651">651</span>
+<span id="652">652</span>
+<span id="653">653</span>
+<span id="654">654</span>
+<span id="655">655</span>
+<span id="656">656</span>
+<span id="657">657</span>
+<span id="658">658</span>
+<span id="659">659</span>
+<span id="660">660</span>
+<span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
+<span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// Copyright 2021 IOTA Stiftung</span>
 <span class="comment">// SPDX-License-Identifier: Apache-2.0</span>
@@ -671,6 +732,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">primary_node</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span>,
     <span class="ident">primary_pow_node</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span>,
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">nodes</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span>,
+    <span class="ident">permanodes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">sync</span>: <span class="ident">bool</span>,
     <span class="ident">sync_interval</span>: <span class="ident">Duration</span>,
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">synced_nodes</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
@@ -686,6 +748,7 @@
         <span class="ident">d</span>.<span class="ident">field</span>(<span class="string">&quot;primary_node&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">primary_node</span>);
         <span class="ident">d</span>.<span class="ident">field</span>(<span class="string">&quot;primary_pow_node&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">primary_pow_node</span>);
         <span class="ident">d</span>.<span class="ident">field</span>(<span class="string">&quot;nodes&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">nodes</span>);
+        <span class="ident">d</span>.<span class="ident">field</span>(<span class="string">&quot;permanodes&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">permanodes</span>);
         <span class="ident">d</span>.<span class="ident">field</span>(<span class="string">&quot;sync&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">sync</span>);
         <span class="ident">d</span>.<span class="ident">field</span>(<span class="string">&quot;sync_interval&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">sync_interval</span>);
         <span class="ident">d</span>.<span class="ident">field</span>(<span class="string">&quot;synced_nodes&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">synced_nodes</span>);
@@ -701,6 +764,37 @@
     }
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_nodes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">query</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>, <span class="ident">remote_pow</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">nodes_with_modified_url</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
+
+        <span class="comment">// Endpoints for which only permanodes will be used if provided</span>
+        <span class="kw">let</span> <span class="ident">permanode_regexes</span> <span class="op">=</span> <span class="macro">lazy_static</span><span class="macro">!</span>(
+            [
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;messages/([A-Fa-f0-9]{64})&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;messages/([A-Fa-f0-9]{64})/metadata&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;messages/([A-Fa-f0-9]{64})/children&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;outputs/([A-Fa-f0-9]{64})(\d{4})&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+              <span class="comment">// bech32 address</span>
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;addresses/(iota|atoi|iot|toi)1[A-Za-z0-9]&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;addresses/(iota|atoi|iot|toi)1[A-Za-z0-9]+/outputs&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+              <span class="comment">// ED25519 address hex</span>
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;addresses/ed25519/([A-Fa-f0-9]{64})&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;addresses/ed25519/([A-Fa-f0-9]{64})/outputs&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;transactions/([A-Fa-f0-9]{64})/included-message&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+              <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;milestones/[0-9]&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;regex failed&quot;</span>),
+            ].<span class="ident">to_vec</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span>
+        );
+        <span class="kw">if</span> <span class="ident">permanode_regexes</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">re</span><span class="op">|</span> <span class="ident">re</span>.<span class="ident">is_match</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>)) <span class="op">|</span><span class="op">|</span> (<span class="ident">path</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;api/v1/messages&quot;</span> <span class="op">&amp;&amp;</span> <span class="ident">query</span>.<span class="ident">is_some</span>()) {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">permanodes</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">permanodes</span>.<span class="ident">clone</span>() {
+                <span class="comment">// remove api/v1/ since permanodes can have custom keyspaces</span>
+                <span class="comment">// https://editor.swagger.io/?url=https://raw.githubusercontent.com/iotaledger/chronicle.rs/main/docs/api.yaml</span>
+                <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">path</span>[<span class="string">&quot;api/v1/&quot;</span>.<span class="ident">len</span>()..];
+                <span class="kw">for</span> <span class="kw-2">mut</span> <span class="ident">permanode</span> <span class="kw">in</span> <span class="ident">permanodes</span> {
+                    <span class="ident">permanode</span>.<span class="ident">url</span>.<span class="ident">set_path</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}{}&quot;</span>, <span class="ident">permanode</span>.<span class="ident">url</span>.<span class="ident">path</span>(), <span class="ident">path</span>));
+                    <span class="ident">permanode</span>.<span class="ident">url</span>.<span class="ident">set_query</span>(<span class="ident">query</span>);
+                    <span class="ident">nodes_with_modified_url</span>.<span class="ident">push</span>(<span class="ident">permanode</span>);
+                }
+            }
+        }
+
         <span class="kw">if</span> <span class="ident">remote_pow</span> {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">pow_node</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">primary_pow_node</span>.<span class="ident">clone</span>() {
                 <span class="ident">pow_node</span>.<span class="ident">url</span>.<span class="ident">set_path</span>(<span class="ident">path</span>);
@@ -923,6 +1017,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">primary_node</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span>,
     <span class="ident">primary_pow_node</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span>,
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">nodes</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">permanodes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="ident">sync</span>: <span class="ident">bool</span>,
     <span class="ident">sync_interval</span>: <span class="ident">Duration</span>,
     <span class="ident">quorum</span>: <span class="ident">bool</span>,
@@ -969,6 +1064,31 @@
                 .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="kw">crate</span>::<span class="ident">Error</span>::<span class="ident">UrlAuthError</span>(<span class="string">&quot;password&quot;</span>.<span class="ident">to_string</span>()))<span class="question-mark">?</span>;
         }
         <span class="self">self</span>.<span class="ident">primary_pow_node</span>.<span class="ident">replace</span>(<span class="ident">Node</span> { <span class="ident">url</span>, <span class="ident">jwt</span> });
+        <span class="prelude-val">Ok</span>(<span class="self">self</span>)
+    }
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">with_permanode</span>(
+        <span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
+        <span class="ident">jwt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+        <span class="ident">basic_auth_name_pwd</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>)<span class="op">&gt;</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">validate_url</span>(<span class="ident">Url</span>::<span class="ident">parse</span>(<span class="ident">url</span>)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">name</span>, <span class="ident">password</span>)) <span class="op">=</span> <span class="ident">basic_auth_name_pwd</span> {
+            <span class="ident">url</span>.<span class="ident">set_username</span>(<span class="ident">name</span>)
+                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="kw">crate</span>::<span class="ident">Error</span>::<span class="ident">UrlAuthError</span>(<span class="string">&quot;username&quot;</span>.<span class="ident">to_string</span>()))<span class="question-mark">?</span>;
+            <span class="ident">url</span>.<span class="ident">set_password</span>(<span class="prelude-val">Some</span>(<span class="ident">password</span>))
+                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="kw">crate</span>::<span class="ident">Error</span>::<span class="ident">UrlAuthError</span>(<span class="string">&quot;password&quot;</span>.<span class="ident">to_string</span>()))<span class="question-mark">?</span>;
+        }
+        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">permanodes</span> {
+            <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">permanodes</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">permanodes</span>.<span class="ident">insert</span>(<span class="ident">Node</span> { <span class="ident">url</span>, <span class="ident">jwt</span> });
+            }
+            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">permanodes</span> <span class="op">=</span> <span class="ident">HashSet</span>::<span class="ident">new</span>();
+                <span class="ident">permanodes</span>.<span class="ident">insert</span>(<span class="ident">Node</span> { <span class="ident">url</span>, <span class="ident">jwt</span> });
+                <span class="self">self</span>.<span class="ident">permanodes</span>.<span class="ident">replace</span>(<span class="ident">permanodes</span>);
+            }
+        }
         <span class="prelude-val">Ok</span>(<span class="self">self</span>)
     }
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">with_node_sync_disabled</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
@@ -1057,6 +1177,7 @@
             <span class="ident">primary_node</span>: <span class="self">self</span>.<span class="ident">primary_node</span>,
             <span class="ident">primary_pow_node</span>: <span class="self">self</span>.<span class="ident">primary_pow_node</span>,
             <span class="ident">nodes</span>: <span class="self">self</span>.<span class="ident">nodes</span>,
+            <span class="ident">permanodes</span>: <span class="self">self</span>.<span class="ident">permanodes</span>,
             <span class="ident">sync</span>: <span class="self">self</span>.<span class="ident">sync</span>,
             <span class="ident">sync_interval</span>: <span class="self">self</span>.<span class="ident">sync_interval</span>,
             <span class="ident">synced_nodes</span>,
@@ -1074,6 +1195,7 @@
             <span class="ident">primary_node</span>: <span class="prelude-val">None</span>,
             <span class="ident">primary_pow_node</span>: <span class="prelude-val">None</span>,
             <span class="ident">nodes</span>: <span class="ident">HashSet</span>::<span class="ident">new</span>(),
+            <span class="ident">permanodes</span>: <span class="prelude-val">None</span>,
             <span class="ident">sync</span>: <span class="bool-val">true</span>,
             <span class="ident">sync_interval</span>: <span class="ident">NODE_SYNC_INTERVAL</span>,
             <span class="ident">quorum</span>: <span class="bool-val">false</span>,
@@ -1108,10 +1230,10 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm&quot;</span>))]</span>
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Response</span>(<span class="ident">reqwest</span>::<span class="ident">Response</span>);
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm&quot;</span>))]</span>
 <span class="kw">impl</span> <span class="ident">Response</span> {
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">status</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u16</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">status</span>().<span class="ident">as_u16</span>()
@@ -1126,7 +1248,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm&quot;</span>))]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">HttpClient</span> {
     <span class="ident">client</span>: <span class="ident">reqwest</span>::<span class="ident">Client</span>,
@@ -1135,7 +1257,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;sync&quot;</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>)))]</span>
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">HttpClient</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm&quot;</span>))]</span>
 <span class="kw">impl</span> <span class="ident">HttpClient</span> {
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
