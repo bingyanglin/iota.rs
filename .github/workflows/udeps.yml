@@ -59,7 +59,7 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: install
-        args: cargo-udeps --locked --version 0.1.20
+        args: cargo-udeps --locked --version 0.1.20 +nightly
 
     - uses: actions-rs/cargo@v1
       with:
