@@ -59,19 +59,19 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: install
-        args: cargo-udeps --locked --version 0.1.20 +nightly
+        args: cargo-udeps --locked --version 0.1.20
 
     - uses: actions-rs/cargo@v1
       with:
-        command: +nightly udeps
+        command: udeps
         args: --all-targets
 
     - uses: actions-rs/cargo@v1
       with:
-        command: +nightly udeps
+        command: udeps
         args: --manifest-path ./bindings/nodejs/native/Cargo.toml --all-targets
 
     - uses: actions-rs/cargo@v1
       with:
-        command: +nightly udeps
+        command: udeps
         args: --manifest-path ./bindings/python/native/Cargo.toml --all-targets
