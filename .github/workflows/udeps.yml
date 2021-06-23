@@ -59,11 +59,11 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: install
-        args: cargo-udeps --locked
+        args: --git https://github.com/est31/cargo-udeps --locked
 
     - uses: actions-rs/cargo@v1
       with:
-        command: +nightly udeps
+        command: udeps
         args: --all-targets
 
     - uses: actions-rs/cargo@v1
