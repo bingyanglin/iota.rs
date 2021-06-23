@@ -62,15 +62,15 @@ jobs:
 
     - uses: actions-rs/cargo@v1
       with:
-        command: udeps
+        command: +nightly udeps
         args: --all-targets
 
     - uses: actions-rs/cargo@v1
       with:
-        command: udeps
+        command: +nightly udeps
         args: --manifest-path ./bindings/nodejs/native/Cargo.toml --all-targets
 
     - uses: actions-rs/cargo@v1
       with:
-        command: udeps
+        command: +nightly udeps
         args: --manifest-path ./bindings/python/native/Cargo.toml --all-targets
