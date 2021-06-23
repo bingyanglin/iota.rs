@@ -58,8 +58,8 @@ jobs:
 
     - uses: actions-rs/cargo@v1
       with:
-        command: install --version 0.1.21
-        args: cargo-udeps --locked
+        command: install
+        args: cargo-udeps --locked  --version 0.1.21
 
     - uses: actions-rs/cargo@v1
       with:
